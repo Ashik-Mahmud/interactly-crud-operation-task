@@ -1,11 +1,27 @@
+import Axios from "axios";
+import { toast } from "react-hot-toast";
 import { ContactInterface } from "../interfaces/contactInterface";
-
 type Props = {
   contactList: ContactInterface[];
   isLoading: boolean;
+  setIsInserted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ContactList = ({ contactList, isLoading }: Props) => {
+const ContactList = ({ contactList, isLoading, setIsInserted }: Props) => {
+  /* Handle Edit Contact */
+
+  const handleEditContact = async (id: number | undefined) => {
+    const isConfirm = window.confirm("Are you sure?");
+    if (isConfirm) {
+      await Axios.delete(
+        `http://localhost:5000/api/contact/deleteContact/${id}`
+      ).then((result) => {
+        toast.success(result.data?.message);
+        setIsInserted((state) => !state);
+      });
+    }
+  };
+
   return (
     <div id="contact-list">
       <h3>Contact List</h3>
@@ -35,7 +51,12 @@ const ContactList = ({ contactList, isLoading }: Props) => {
                     </td>
                     <td>
                       <button>Edit</button>
-                      <button className="delete-btn">Delete</button>
+                      <button
+                        onClick={() => handleEditContact(id)}
+                        className="delete-btn"
+                      >
+                        Delete
+                      </button>
                       <button>View</button>
                     </td>
                   </tr>

@@ -64,7 +64,11 @@ const Home = (props: Props) => {
           contactData={contactData}
         />
         <hr />
-        <ContactList contactList={contactList} isLoading={isLoading} />
+        <ContactList
+          contactList={contactList}
+          isLoading={isLoading}
+          setIsInserted={setIsInserted}
+        />
       </div>
     </div>
   );
