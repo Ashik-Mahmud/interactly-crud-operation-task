@@ -17,6 +17,7 @@ const Home = (props: Props) => {
 
   const [contactList, setContactList] = useState<ContactInterface[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isInserted, setIsInserted] = useState<boolean>(false);
 
   /*   Handle Form Submitted */
   const handleFormSubmit = async (event: any) => {
@@ -38,6 +39,7 @@ const Home = (props: Props) => {
       .then((res) => {
         event.target.reset();
         toast.success("Contact created successfully");
+        setIsInserted((state) => !state);
       })
       .catch((error) => {
         toast.error(error.response?.data.message);
@@ -50,7 +52,7 @@ const Home = (props: Props) => {
       setContactList(res.data?.data);
       setIsLoading(true);
     });
-  }, []);
+  }, [isInserted]);
 
   return (
     <div>
