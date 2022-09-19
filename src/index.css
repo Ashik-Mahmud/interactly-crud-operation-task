@@ -102,3 +102,41 @@ table thead {
 #contact-list button:last-child {
   background-color: #3aa6ad;
 }
+
+.model {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.model .model-content {
+  width: min(100%, 500px);
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  position: relative;
+}
+.model .model-header {
+  text-align: center;
+}
+.model .close-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: 0.1rem 0.6rem;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  background-color: #df483dd2;
+  color: #fff;
+  transition: all 0.5s ease;
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+}

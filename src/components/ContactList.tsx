@@ -1,6 +1,8 @@
 import Axios from "axios";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { ContactInterface } from "../interfaces/contactInterface";
+import View from "./View";
 type Props = {
   contactList: ContactInterface[];
   isLoading: boolean;
@@ -14,6 +16,8 @@ const ContactList = ({
   setIsInserted,
   handleEditContact,
 }: Props) => {
+  const [view, setView] = useState<ContactInterface>({} as ContactInterface);
+
   /* Handle Delete Contact */
   const handleDeleteContact = async (id: number | undefined) => {
     const isConfirm = window.confirm("Are you sure?");
@@ -26,6 +30,19 @@ const ContactList = ({
       });
     }
   };
+
+  /* Handle View */
+  const handleView = async (id: number | undefined) => {
+    await Axios.get(`http://localhost:5000/api/contact/getContact/${id}`).then(
+      (result) => {
+        setView(result.data?.data[0]);
+      }
+    );
+  };
+
+  if (view?.id) {
+    return <View view={view} setView={setView} />;
+  }
 
   return (
     <div id="contact-list">
@@ -64,7 +81,7 @@ const ContactList = ({
                       >
                         Delete
                       </button>
-                      <button>View</button>
+                      <button onClick={() => handleView(id)}>View</button>
                     </td>
                   </tr>
                 )
