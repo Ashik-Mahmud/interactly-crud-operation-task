@@ -52,7 +52,7 @@ const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
             onChange={(event) =>
               setContactData({
                 ...contactData,
-                mobile_phone: event.target.value,
+                mobile_number: event.target.value,
               })
             }
           />

@@ -1,8 +1,9 @@
 export interface ContactInterface {
+  id?: number;
   first_name: string;
   last_name: string;
   email: string;
-  mobile_phone: string;
+  mobile_number: string;
 }
 
 // Language: typescript

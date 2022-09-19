@@ -1,17 +1,22 @@
 import Axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import ContactList from "../components/ContactList";
 import Form from "../components/Form";
+import { ContactInterface } from "../interfaces/contactInterface";
 type Props = {};
 
 const Home = (props: Props) => {
-  const [contactData, setContactData] = useState({
+  /* Declares all the Necessary States */
+  const [contactData, setContactData] = useState<ContactInterface>({
     first_name: "",
     last_name: "",
     email: "",
-    mobile_phone: "",
+    mobile_number: "",
   });
+
+  const [contactList, setContactList] = useState<ContactInterface[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /*   Handle Form Submitted */
   const handleFormSubmit = async (event: any) => {
@@ -20,7 +25,7 @@ const Home = (props: Props) => {
       contactData.email === "" ||
       contactData.first_name === "" ||
       contactData.last_name === "" ||
-      contactData.mobile_phone === ""
+      contactData.mobile_number === ""
     ) {
       toast.error("Please fill all the fields");
       return;
@@ -29,11 +34,23 @@ const Home = (props: Props) => {
     await Axios.post(
       "http://localhost:5000/api/contact/createContact",
       contactData
-    ).then((res) => {
-      console.log(res);
-      toast.success("Contact created successfully");
-    });
+    )
+      .then((res) => {
+        event.target.reset();
+        toast.success("Contact created successfully");
+      })
+      .catch((error) => {
+        toast.error(error.response?.data.message);
+      });
   };
+
+  /* Fetch All the Data from  MYSQL Databases */
+  useEffect(() => {
+    Axios.get("http://localhost:5000/api/contact/getContacts").then((res) => {
+      setContactList(res.data?.data);
+      setIsLoading(true);
+    });
+  }, []);
 
   return (
     <div>
@@ -45,7 +62,7 @@ const Home = (props: Props) => {
           contactData={contactData}
         />
         <hr />
-        <ContactList />
+        <ContactList contactList={contactList} isLoading={isLoading} />
       </div>
     </div>
   );
