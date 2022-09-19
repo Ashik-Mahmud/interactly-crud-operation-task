@@ -1,13 +1,104 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+}
+.container {
+  max-width: min(100%, 1200px);
+  margin-inline: auto;
+  padding: 1rem 2rem;
+}
+
+/* CRUD Form Component in React */
+#crud-form {
+  position: relative;
+}
+#crud-form .input-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0rem;
+  position: relative;
+}
+#crud-form .input-group input {
+  width: 50%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+.input-group button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Table Component in React */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+}
+table thead {
+  background-color: #f1f1f1;
+}
+#contact-list {
+  width: 100%;
+  overflow-x: auto;
+}
+#contact-list th,
+#contact-list td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+#contact-list a {
+  text-decoration: none;
+  color: #4caf50;
+  font-weight: bold;
+  transition: all 0.5s ease;
+}
+
+#contact-list a:hover {
+  color: #333;
+}
+#contact-list button {
+  padding: 0.1rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  transition: all 0.5s ease;
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  margin: 0rem 0.2rem;
+}
+#contact-list button:hover {
+  background-color: #333;
+}
+#contact-list button.delete-btn {
+  background-color: #df483d;
+}
+#contact-list button:last-child {
+  background-color: #3aa6ad;
 }
