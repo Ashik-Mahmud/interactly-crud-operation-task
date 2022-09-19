@@ -4,12 +4,24 @@ type Props = {
   handleFormSubmit: (event: any) => void;
   setContactData: React.Dispatch<React.SetStateAction<ContactInterface>>;
   contactData: ContactInterface;
+  update: ContactInterface[];
+  handleEditForm: (event: any) => void;
 };
 
-const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
+const Form = ({
+  setContactData,
+  contactData,
+  handleFormSubmit,
+  update,
+  handleEditForm,
+}: Props) => {
   return (
     <div id="crud-form">
-      <form action="" onSubmit={handleFormSubmit}>
+      <form
+        action=""
+        method="post"
+        onSubmit={update[0]?.id ? handleEditForm : handleFormSubmit}
+      >
         <div className="input-group">
           <label htmlFor="first_name">First Name</label>
           <input
@@ -19,6 +31,7 @@ const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
             onChange={(event) =>
               setContactData({ ...contactData, first_name: event.target.value })
             }
+            defaultValue={update[0]?.id && update[0]?.first_name}
           />
         </div>
         <div className="input-group">
@@ -30,6 +43,7 @@ const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
             onChange={(event) =>
               setContactData({ ...contactData, last_name: event.target.value })
             }
+            defaultValue={update[0]?.id && update[0]?.last_name}
           />
         </div>
         <div className="input-group">
@@ -41,6 +55,7 @@ const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
             onChange={(event) =>
               setContactData({ ...contactData, email: event.target.value })
             }
+            defaultValue={update[0]?.id && update[0]?.email}
           />
         </div>
         <div className="input-group">
@@ -55,10 +70,11 @@ const Form = ({ setContactData, contactData, handleFormSubmit }: Props) => {
                 mobile_number: event.target.value,
               })
             }
+            defaultValue={update[0]?.id && update[0]?.mobile_number}
           />
         </div>
         <div className="input-group">
-          <button>Save Contact</button>
+          <button>{update[0]?.id ? "Update" : "Save"} Contact</button>
         </div>
       </form>
     </div>

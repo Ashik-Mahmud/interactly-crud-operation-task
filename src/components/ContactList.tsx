@@ -5,12 +5,17 @@ type Props = {
   contactList: ContactInterface[];
   isLoading: boolean;
   setIsInserted: React.Dispatch<React.SetStateAction<boolean>>;
+  handleEditContact: (id: number | undefined) => void;
 };
 
-const ContactList = ({ contactList, isLoading, setIsInserted }: Props) => {
-  /* Handle Edit Contact */
-
-  const handleEditContact = async (id: number | undefined) => {
+const ContactList = ({
+  contactList,
+  isLoading,
+  setIsInserted,
+  handleEditContact,
+}: Props) => {
+  /* Handle Delete Contact */
+  const handleDeleteContact = async (id: number | undefined) => {
     const isConfirm = window.confirm("Are you sure?");
     if (isConfirm) {
       await Axios.delete(
@@ -50,9 +55,11 @@ const ContactList = ({ contactList, isLoading, setIsInserted }: Props) => {
                       <a href={`tel:${mobile_number}`}>{mobile_number}</a>
                     </td>
                     <td>
-                      <button>Edit</button>
+                      <button onClick={() => handleEditContact(id)}>
+                        Edit
+                      </button>
                       <button
-                        onClick={() => handleEditContact(id)}
+                        onClick={() => handleDeleteContact(id)}
                         className="delete-btn"
                       >
                         Delete
